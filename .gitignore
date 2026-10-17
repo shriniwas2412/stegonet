@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Data (download separately, see README)
+dataset/
+archive/
+
+# Old experiments and checkpoints kept locally only
+old_version/
+checkpoints/
+
+# TLS material: generate locally with generate_certificates.py, never commit
+certificates/
+*.key
+*.pem
+*.crt
+
+# Runtime output
+received/
+stego.png
+revealed.png
+results_train.log
+*.log
+.claude/
