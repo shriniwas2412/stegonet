@@ -96,9 +96,12 @@ python -m stegonet send --stego stego.png --port 5000
 ## Training and evaluation
 
 The model was trained on the [Stego-Images dataset](https://www.kaggle.com/datasets/marcozuppelli/stegoimagesdataset)
-(16,000 training images, 256×256 app icons). Put the images in `dataset/train`, `dataset/val` and `dataset/test`, then:
+(16,000 training images, 256×256 app icons). The dataset isn't stored in this repo: it's large, it's
+licensed by its authors, and half of it carries real hidden payloads (JavaScript, PowerShell). Download it
+from Kaggle, unzip it into `archive/`, then:
 
 ```bash
+python prepare_data.py                                   # archive/ -> dataset/{train,val,test} at 256x256
 python train.py --epochs 14 --size 64 --batch-size 32   # ~1.5 h on an Apple M1 (MPS)
 python evaluate.py --data dataset/test --pairs 500       # writes results/metrics.json + samples.png
 ```
@@ -120,6 +123,7 @@ stegonet/
   metrics.py     PSNR, SSIM, average pixel difference
   __main__.py    command-line interface
 app.py                    Streamlit web app
+prepare_data.py           builds dataset/ from the Kaggle download
 train.py / evaluate.py    training and benchmark scripts
 generate_certificates.py  private CA + server/client certificates
 tests/                    unit and TLS integration tests (run in GitHub Actions)
